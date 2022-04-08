@@ -1,0 +1,13 @@
+<form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>URL</mat-label>
+      <input matInput placeholder="https://..." name="url" [(ngModel)]="url">
+    </mat-form-field>
+  
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Description</mat-label>
+        <input matInput placeholder="Add a description" name="description" [(ngModel)]="description">
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="addBookmark()">Save</button>
+    </form>
+  
