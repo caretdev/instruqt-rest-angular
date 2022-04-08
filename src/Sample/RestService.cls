@@ -20,6 +20,7 @@ ClassMethod Test() As %Status
     quit $$$OK
 }
 
+/// Get all bookmarks from the database
 ClassMethod List() As %Status
 {
   set list=[],sc=1
@@ -31,17 +32,19 @@ ClassMethod List() As %Status
     set sc=$$$ADDSC(sc,$$$ERROR(5001, "Error executing sql statement"))
   }
   while Result.%Next() {
-    set bookmark={"url":(Result.Url),"description":(Result.Description),
-    "dateAdded":($zd(Result.DateAdded,3)),"timeAdded":($zt(Result.TimeAdded,2))
+    set bookmark={
+      "url":(Result.Url),
+      "description":(Result.Description),
+      "dateAdded":($zd(Result.DateAdded,3)),
+      "timeAdded":($zt(Result.TimeAdded,2))
     }
     do list.%Push(bookmark)
   }
-
   if $$$ISOK(sc) write list.%ToJSON()
-
   return sc
 }
 
+/// Add one bookmark to database
 ClassMethod Add() As %Status
 {
   set sc=$$$OK
@@ -49,7 +52,7 @@ ClassMethod Add() As %Status
   set Bookmark=##class(Sample.Bookmark).%New()
   set Bookmark.Url=jsonRequest.url
   set Bookmark.Description=jsonRequest.description
-  set Bookmark.DateAdded=+$horolog
+  set Bookmark.DateAdded=$piece($horolog,",",1)
   set Bookmark.TimeAdded=$piece($horolog,",",2)
   set sc=$$$ADDSC(sc,Bookmark.%Save())
   return sc
