@@ -8,13 +8,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-bookmark-form',
   templateUrl: './bookmark-form.component.html',
-  styleUrls: ['./bookmark-form.component.scss']
+  styleUrls: ['./bookmark-form.component.css']
 })
 export class BookmarkFormComponent implements OnInit {
   url='';
   description='';
 
-  constructor(private http:HttpClient, private snackBar: MatSnackBar) { } 
+  constructor(private http:HttpClient, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API_URL: 'http://localhost:56155/bookmarks'
+  API_URL: '/bookmarks'
 };
 
 /*

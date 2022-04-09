@@ -21,13 +21,13 @@ const SAMPLE_DATA: Bookmark[] = [
  @Component({
   selector: 'app-bookmark-list',
   templateUrl: './bookmark-list.component.html',
-  styleUrls: ['./bookmark-list.component.scss']
+  styleUrls: ['./bookmark-list.component.css']
 })
 export class BookmarkListComponent implements OnInit {
   displayedColumns: string[] = ['description', 'url', 'dateAdded', 'timeAdded'];
   dataSource = null;
 
-  constructor(private http:HttpClient) { } 
+  constructor(private http:HttpClient) { }
 
   ngOnInit(): void {
     this.dataSource=of(SAMPLE_DATA);

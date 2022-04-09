@@ -1,0 +1,8 @@
+{
+  "/bookmarks/*": {
+    "target": "http://localhost:61925/",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}
