@@ -31,6 +31,5 @@ export class BookmarkListComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataSource=of(SAMPLE_DATA);
-    this.dataSource=this.http.get(environment.API_URL+'/list');
   }
 }
