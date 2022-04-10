@@ -10,9 +10,9 @@ XData UrlMap [ XMLNamespace = "http://www.intersystems.com/urlmap" ]
 {
 <Routes>
   <Route Url="/test" Method="GET" Call="Test" />
-  <Route Url="/list" Method="GET" Call="List" />
-  <Route Url="/add" Method="POST" Call="Add" />
   <Route Url="/swagger" Method="GET" Call="Swagger" />
+  <!-- Place new routes below -->
+
 </Routes>
 }
 
@@ -31,42 +31,6 @@ ClassMethod Swagger() As %Status
   Quit $$$OK
 }
 
-/// Get all bookmarks from the database
-ClassMethod List() As %Status
-{
-  Set list = [], sc = 1
-  Set sql="SELECT Url, Description, DateAdded, TimeAdded FROM Sample.Bookmark"
-  Set Statement = ##class(%SQL.Statement).%New()
-  Set sc=$$$ADDSC(sc,Statement.%Prepare(sql))
-  Set Result = Statement.%Execute()
-  If (Result.%SQLCODE<0) {
-    Set sc=$$$ADDSC(sc,$$$ERROR(5001, "Error executing sql statement"))
-  }
-  While Result.%Next() {
-    Set bookmark={
-      "url":(Result.Url),
-      "description":(Result.Description),
-      "dateAdded":($ZDate(Result.DateAdded,3)),
-      "timeAdded":($ZTime(Result.TimeAdded,2))
-    }
-    Do list.%Push(bookmark)
-  }
-  If $$$ISOK(sc) Write list.%ToJSON()
-  Return sc
-}
-
-/// Add one bookmark to database
-ClassMethod Add() As %Status
-{
-  Set sc=$$$OK
-  Set jsonRequest=##class(%Library.DynamicObject).%FromJSON(%request.Content)
-  Set Bookmark=##class(Sample.Bookmark).%New()
-  Set Bookmark.Url=jsonRequest.url
-  Set Bookmark.Description=jsonRequest.description
-  Set Bookmark.DateAdded=$Piece($Horolog,",",1)
-  Set Bookmark.TimeAdded=$Piece($Horolog,",",2)
-  Set sc=$$$ADDSC(sc,Bookmark.%Save())
-  Return sc
-}
+/* Place new methods below */
 
 }
