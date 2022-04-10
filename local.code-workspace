@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"name": "iris",
+			"path": "backend"
+		},
+		{
+			"path": "angular"
+		}
+	],
+	"settings": {
+		"objectscript.conn": {
+			"active": true,
+			"ns": "IRISAPP",
+			"username": "_SYSTEM",
+			"password": "SYS",
+			"docker-compose": {
+				"service": "iris"
+			}
+		}
+	}
+}
