@@ -1,6 +1,9 @@
 {
 	"folders": [
 		{
+			"path": "."
+		},
+		{
 			"name": "iris",
 			"path": "backend"
 		},
@@ -14,9 +17,8 @@
 			"ns": "IRISAPP",
 			"username": "_SYSTEM",
 			"password": "SYS",
-			"docker-compose": {
-				"service": "iris"
-			}
+			"host": "localhost",
+			"port": 61184
 		}
 	}
 }
