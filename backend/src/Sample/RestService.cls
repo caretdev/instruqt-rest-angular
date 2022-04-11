@@ -13,6 +13,7 @@ XData UrlMap [ XMLNamespace = "http://www.intersystems.com/urlmap" ]
   <Route Url="/swagger" Method="GET" Call="Swagger" />
   <!-- Place new routes below -->
   <Route Url="/list" Method="GET" Call="List" />
+  <Route Url="/add" Method="POST" Call="Add" />
 </Routes>
 }
 
@@ -32,7 +33,6 @@ ClassMethod Swagger() As %Status
 }
 
 /* Place new methods below */
-
 ClassMethod List() As %Status
 {
   set list=[],sc=1
@@ -53,6 +53,20 @@ ClassMethod List() As %Status
     do list.%Push(bookmark)
   }
   if $$$ISOK(sc) write list.%ToJSON()
+  return sc
+}
+
+/// Add one bookmark to database
+ClassMethod Add() As %Status
+{
+  set sc=$$$OK
+  set jsonRequest=##class(%Library.DynamicObject).%FromJSON(%request.Content)
+  set Bookmark=##class(Sample.Bookmark).%New()
+  set Bookmark.Url=jsonRequest.url
+  set Bookmark.Description=jsonRequest.description
+  set Bookmark.DateAdded=$piece($horolog,",",1)
+  set Bookmark.TimeAdded=$piece($horolog,",",2)
+  set sc=$$$ADDSC(sc,Bookmark.%Save())
   return sc
 }
 
