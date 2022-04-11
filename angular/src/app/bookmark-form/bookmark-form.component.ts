@@ -20,6 +20,11 @@ export class BookmarkFormComponent implements OnInit {
   }
 
   addBookmark(): void {
+    this.http.post(environment.API_URL+'/add',{url:this.url, description:this.description}).pipe(
+      switchMap(()=>this.snackBar.open('New URL added', 'OK').afterDismissed()),
+      tap(()=>window.location.reload()),
+      catchError(()=>this.snackBar.open('Something went wrong', 'OK').afterDismissed()),
+    ).subscribe()
   }
 
 }
