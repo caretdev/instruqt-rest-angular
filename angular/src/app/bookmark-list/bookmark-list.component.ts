@@ -30,6 +30,7 @@ export class BookmarkListComponent implements OnInit {
   constructor(private http:HttpClient) { }
 
   ngOnInit(): void {
-    this.dataSource=of(SAMPLE_DATA);
+    this.dataSource = of(SAMPLE_DATA);
+    this.dataSource=this.http.get(environment.API_URL+'/list');
   }
 }
