@@ -82,7 +82,9 @@
             },
             "development": {
               "browserTarget": "app:build:development",
-              "proxyConfig": "proxy.conf.json"
+              "proxyConfig": "proxy.conf.json",
+              "host": "0.0.0.0",
+              "disableHostCheck": true
             }
           },
           "defaultConfiguration": "development"
