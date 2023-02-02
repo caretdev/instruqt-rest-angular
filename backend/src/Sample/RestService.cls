@@ -6,6 +6,10 @@ Parameter HandleCorsRequest = 1;
 
 Parameter CONTENTTYPE As STRING = "application/json";
 
+Parameter CONVERTINPUTSTREAM = 1;
+
+Parameter CHARSET = "utf-8";
+
 XData UrlMap [ XMLNamespace = "http://www.intersystems.com/urlmap" ]
 {
 <Routes>
